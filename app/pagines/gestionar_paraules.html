@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Afegir paraules</title>
+</head>
+<body>
+  <h1>Afegir paraules</h1>
+  <form id="add-word-form">
+    <label for="new-word">Nova paraula:</label>
+    <input type="text" id="new-word" required>
+    <label for="new-translation">Traducció:</label>
+    <input type="text" id="new-translation" required>
+    <button type="submit">Afegir</button>
+  </form>
+  
+  <h2>Paraules guardades</h2>
+  <table id="word-table">
+    <thead>
+      <tr>
+        <th>Paraula</th>
+        <th>Traducció</th>
+      </tr>
+    </thead>
+    <tbody id="word-table-body">
+    </tbody>
+  </table>
+  
+  <script src="../js/gestionar_paraules.js"></script>
+</body>
+</html>

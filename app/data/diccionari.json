@@ -1,0 +1,32 @@
+{
+    "paraules": [
+      {
+        "paraula": "casa",
+        "traduccio": "house"
+      },
+      {
+        "paraula": "cotxe",
+        "traduccio": "car"
+      },
+      {
+        "paraula": "ordinador",
+        "traduccio": "computer"
+      },
+      {
+        "paraula": "llibre",
+        "traduccio": "book"
+      },
+      {
+        "paraula": "llibreta",
+        "traduccio": "notebook"
+      },
+      {
+        "paraula": "taula",
+        "traduccio": "table"
+      },
+      {
+        "paraula": "cadira",
+        "traduccio": "chair"
+      }
+    ]
+  }

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Configuració</title>
+  <style>
+    .error-message {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <h1>Configuració</h1>
+  <form id="config-form">
+    <label for="num-letters">Número de lletres:</label>
+    <input type="number" id="num-letters" min="1" max="90" required>
+    
+    <label for="allow-repeated">Lletres repetides:</label>
+    <select id="allow-repeated">
+      <option value="true">Sí</option>
+      <option value="false">No</option>
+    </select>
+    
+    <label for="only-word-letters">Només lletres paraula:</label>
+    <select id="only-word-letters">
+      <option value="true">Sí</option>
+      <option value="false">No</option>
+    </select>
+    
+    <label for="letter-type">Tipus de lletra:</label>
+    <select id="letter-type">
+      <option value="lowercase">Minúscules</option>
+      <option value="uppercase">Majúscules</option>
+      <option value="mixed">Majúscules i Minúscules</option>
+    </select>
+    
+    <button type="submit">Desa</button>
+  </form>
+  
+  <div id="error-messages"></div>
+  
+  <script src="../js/configuracio.js"></script>
+</body>
+</html>

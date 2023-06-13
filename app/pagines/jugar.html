@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Jugar</title>
+  <style>
+    #canvas {
+      border: 1px solid black;
+      width: 400px;
+      height: 200px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Jugar</h1>
+
+  <label for="player-name">Nom del jugador:</label>
+  <input type="text" id="player-name" required minlength="2">
+  <button id="play-button">Juga</button>
+
+  <h2>Partida en curs</h2>
+  <div id="game-info">
+    <p>Paraula seleccionada: <span id="selected-word"></span></p>
+    <p>Lletres correctes: <span id="correct-letters"></span></p>
+    <p>Intents fallats: <span id="wrong-attempts">0</span></p>
+    <p>Temps: <span id="time">0</span> segons</p>
+  </div>
+
+  <h2>Canvas</h2>
+  <canvas id="canvas"></canvas>
+  <button id="shuffle-button">Renova lletres</button>
+
+
+  <script src="../js/jugar.js"></script>
+</body>
+</html>
