@@ -33,10 +33,8 @@ document.addEventListener('DOMContentLoaded', function() {
     function displayWords() {
       const existingWords = JSON.parse(localStorage.getItem('words')) || [];
       
-      // Limpiar el cuerpo de la tabla
       wordTableBody.innerHTML = '';
   
-      // Agregar las palabras guardadas en el localStorage
       existingWords.forEach(word => {
         const row = document.createElement('tr');
         row.innerHTML = `

@@ -4,12 +4,14 @@ document.addEventListener('DOMContentLoaded', function () {
     const playerNameInput = document.getElementById('player-name');
     const playButton = document.getElementById('play-button');
     const selectedWordElement = document.getElementById('selected-word');
+    const paraula = document.getElementById('paraula');
     const correctLettersElement = document.getElementById('correct-letters');
     const wrongAttemptsElement = document.getElementById('wrong-attempts');
     const timeElement = document.getElementById('time');
 
     let selectedWord = '';
     let shuffledLetters = [];
+    let paraulaSeleccionada = '';
     let correctLetters = '';
     let wrongAttempts = 0;
     let startTime = 0;
@@ -17,25 +19,37 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function startGame() {
         const playerName = playerNameInput.value;
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        const userBirthDate = new Date(currentUser.dataNaixement);
+        const today = new Date();
+        const userAge = today.getFullYear() - userBirthDate.getFullYear();
+
         if (playerName.length < 2) {
             alert('El nom del jugador ha de tenir com a mínim 2 lletres.');
             return;
         }
 
-        // Selecciona una palabra aleatoria del diccionario
         fetch('../data/diccionari.json')
             .then(response => response.json())
             .then(data => {
                 const words = data.paraules;
-                const randomIndex = Math.floor(Math.random() * words.length);
-                const word = words[randomIndex];
+
+                let filteredWords = words;
+
+                if (userAge < 8) {
+                    filteredWords = words.filter(word => word.traduccio.length <= 6);
+                }
+
+                const randomIndex = Math.floor(Math.random() * filteredWords.length);
+                const word = filteredWords[randomIndex];
                 selectedWord = word.traduccio.toLowerCase();
                 selectedWordElement.textContent = selectedWord;
 
-                // Aleatoriza las letras de la palabra
+                paraulaSeleccionada = word.paraula.toLowerCase();
+                paraula.textContent = paraulaSeleccionada;
+
                 shuffledLetters = shuffleLetters(selectedWord);
 
-                // Dibuja las letras en el canvas
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 ctx.font = '30px Arial';
                 const letterWidth = 40;
@@ -46,7 +60,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     x += letterWidth;
                 }
 
-                // Reinicializa los datos de la partida
                 correctLetters = '';
                 wrongAttempts = 0;
                 correctLettersElement.textContent = '';
@@ -54,7 +67,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 startTime = Date.now();
                 timeElement.textContent = '0';
 
-                // Inicia el temporizador
                 clearInterval(timerInterval);
                 timerInterval = setInterval(updateTimer, 1000);
             })
@@ -84,30 +96,26 @@ document.addEventListener('DOMContentLoaded', function () {
             const clickedLetter = shuffledLetters[letterIndex];
             console.log('S\'ha apretat la lletra:', clickedLetter);
 
-            // Resto del código
             if (correctLetters.includes(clickedLetter)) {
-                // La letra ya ha sido seleccionada
+                wrongAttempts++;
+                wrongAttemptsElement.textContent = wrongAttempts;
                 console.log('La lletra ja ha estat seleccionada');
                 return;
             }
 
             if (selectedWord.includes(clickedLetter)) {
-                // La letra es correcta
                 correctLetters += clickedLetter;
                 correctLettersElement.textContent = correctLetters;
 
-                // Verifica si se ha completado la palabra
                 if (correctLetters.length === selectedWord.length) {
                     clearInterval(timerInterval);
-                    alert('Has acabat la partida!');
+                    alert('Has Guanyat!!!');
                     guardarPartida(playerNameInput.value, selectedWord, correctLetters, wrongAttempts, timeElement.textContent);
                 }
             } else {
-                // La letra es incorrecta
                 wrongAttempts++;
                 wrongAttemptsElement.textContent = wrongAttempts;
 
-                // Verifica si se han superado los intentos máximos
                 const maxAttempts = 5;
                 if (wrongAttempts === maxAttempts) {
                     clearInterval(timerInterval);
@@ -116,7 +124,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             }
 
-            // Elimina la letra del canvas
             ctx.clearRect(letterIndex * letterWidth, 0, letterWidth, letterHeight);
         }
     }
@@ -161,13 +168,10 @@ document.addEventListener('DOMContentLoaded', function () {
             temps: temps
         };
 
-        // Obtén las partidas jugadas del localStorage
         const partidesJugades = JSON.parse(localStorage.getItem('partides')) || [];
 
-        // Agrega la nueva partida al arreglo de partidas jugadas
         partidesJugades.push(partida);
 
-        // Guarda el arreglo actualizado en el localStorage
         localStorage.setItem('partides', JSON.stringify(partidesJugades));
     }
 });

@@ -2,11 +2,38 @@
     "users": [
       {
         "username": "admin",
-        "password": "admin"
+        "password": "admin",
+        "dataNaixement": null
       },
       {
         "username": "jaume",
-        "password": "jaume"
+        "password": "jaume",
+        "dataNaixement": "1990-01-01"
+      },
+      {
+        "username": "pere",
+        "password": "pere",
+        "dataNaixement": "1998-01-01"
+      },
+      {
+        "username": "joan",
+        "password": "joan",
+        "dataNaixement": "2005-01-01"
+      },
+      {
+        "username": "pau",
+        "password": "pau",
+        "dataNaixement": "2015-01-01"
+      },
+      {
+        "username": "mar",
+        "password": "mar",
+        "dataNaixement": "2018-01-01"
+      },
+      {
+        "username": "iguana",
+        "password": "igauna",
+        "dataNaixement": "2019-01-01"
       }
     ]
   }

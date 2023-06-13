@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="UTF-8">
   <title>Jugar</title>
@@ -9,28 +10,58 @@
       width: 400px;
       height: 200px;
     }
+
+    #animation {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 9999;
+      background-color: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 20px;
+      border-radius: 5px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    #animation.show {
+      opacity: 1;
+    }
   </style>
 </head>
-<body>
-  <h1>Jugar</h1>
 
+<body>
+  <ul>
+    <li><a href="#" onclick="goBack()">Enrere</a></li>
+  </ul>
+  <script>
+    function goBack() {
+      window.history.back();
+    }
+  </script>
+  <br>
+  <h1>Jugar</h1>
   <label for="player-name">Nom del jugador:</label>
   <input type="text" id="player-name" required minlength="2">
   <button id="play-button">Juga</button>
 
   <h2>Partida en curs</h2>
   <div id="game-info">
-    <p>Paraula seleccionada: <span id="selected-word"></span></p>
+    <p>Paraula: <span id="paraula"></span></p>
+    <p>Paraula traduida: <span id="selected-word"></span></p>
     <p>Lletres correctes: <span id="correct-letters"></span></p>
     <p>Intents fallats: <span id="wrong-attempts">0</span></p>
     <p>Temps: <span id="time">0</span> segons</p>
   </div>
 
-  <h2>Canvas</h2>
   <canvas id="canvas"></canvas>
   <button id="shuffle-button">Renova lletres</button>
-
+  <div id="animation">
+    <img src="success-image.png" alt="Success Image">
+  </div>
 
   <script src="../js/jugar.js"></script>
 </body>
+
 </html>
